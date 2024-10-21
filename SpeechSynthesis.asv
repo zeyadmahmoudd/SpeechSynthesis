@@ -23,13 +23,13 @@ sound(had_female, Fs_female);
 pause(length(had_female)/Fs_female);
 
 %waveform
-[time_male, amplitude_male] = Waveform(had_male, Fs_male, "had male");
-[time_female, amplitude_female] = Waveform(had_female, Fs_female, "had female");
+time_male, amplitude_male = Waveform(had_male, Fs_male, "had male");
+time_female, amplitude_female = Waveform(had_female, Fs_female, "had female");
 
 %spectrum
-[frequencies_male, magnitude_dB_male] = Spectrum(had_male, Fs_male, "had male");
-[frequencies_female, magnitude_dB_female] = Spectrum(had_female, Fs_female, "had female");
+frequencies_male, magnitude_dB_male = Spectrum(had_male, Fs_male, "had male");
+frequencies_female, magnitude_dB_female = Spectrum(had_female, Fs_female, "had female");
 
 %spectogram
-%Spectrogram(had_male, Fs_male);
-%Spectrogram(had_female, Fs_female);
+Spectrogram(had_male, Fs_male);
+Spectrogram(had_female, Fs_female);

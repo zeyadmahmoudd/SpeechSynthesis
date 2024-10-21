@@ -1,4 +1,4 @@
-function plotWaveform(amplitudes, sampling_frequency, title_)
+function [output1, output2] = Waveform(amplitudes, sampling_frequency, title_)
 
     time_step = 1 / sampling_frequency;
     end_time = (length(amplitudes) - 1) / sampling_frequency;
@@ -15,6 +15,9 @@ function plotWaveform(amplitudes, sampling_frequency, title_)
     title(title_ + " waveform")
     
     xlim([min(time), max(time)]);
+
+    output1 = time;
+    output2 = amplitudes;
 end
 
 
