@@ -13,8 +13,8 @@ had_male = speechfiles + had + male + extension;
 had_female = speechfiles + had + female + extension;
 
 %sound values
-[had_male, Fs_male] = audioread(speechfiles + had + male + extension);
-[had_female, Fs_female] = audioread(speechfiles + had + female + extension);
+[had_male, Fs_male] = audioread(had_male);
+[had_female, Fs_female] = audioread(had_female);
 
 %playing sound
 sound(had_male, Fs_male);
@@ -31,5 +31,5 @@ pause(length(had_female)/Fs_female);
 [frequencies_female, magnitude_dB_female] = Spectrum(had_female, Fs_female, "had female");
 
 %spectogram
-%Spectrogram(had_male, Fs_male);
-%Spectrogram(had_female, Fs_female);
+Spectrogram(had_male, Fs_male, "had male");
+Spectrogram(had_female, Fs_female, "had female");
