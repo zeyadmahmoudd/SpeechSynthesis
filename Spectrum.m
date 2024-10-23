@@ -14,7 +14,7 @@ function [output1, output2] = Spectrum(amplitudes, sampling_frequency, title_)
 
     plot(frequencies, magnitude_dB_half);
 
-    xlabel("Frequency(w)");
+    xlabel("Frequency(Hz)");
     ylabel("Amplitude(dB)");
 
     title(title_ + " Spectrum")
