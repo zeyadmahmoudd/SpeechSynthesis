@@ -63,7 +63,7 @@ hold off;
 
 %Plotting Spectrum and lpc for female vowel
 figure;
-[f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_female, "Female vowel spectrum");
+[f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_male, "Male vowel spectrum");
 hold on;
-[f_female_lpc, mag_lpc_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree, "Female lpc vowel spectrum");
+[f_female_lpc, mag_lpc_female] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree, "Male lpc vowel spectrum");
 hold off;
