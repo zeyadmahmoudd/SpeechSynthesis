@@ -15,7 +15,7 @@ extension = ".wav";
 duration = 100e-3 ;
 start_position = 0.1;
 
-lpc_degree = 24;
+lpc_degree = 21;
 
 %male and female files of same word
 had_male = speechfiles + had + male + extension;
@@ -58,12 +58,20 @@ pause(length(vowel_data_female)/Fs_female);
 figure;
 [f_male, mag_orig_male] = Spectrum(vowel_data_male, Fs_male, "Male vowel spectrum");
 hold on;
-[f_male_lpc, mag_lpc_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree, "Male lpc vowel spectrum");
+[f_male_lpc, mag_lpc_male, a_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree, "Male lpc vowel spectrum");
 hold off;
 
 %Plotting Spectrum and lpc for female vowel
 figure;
 [f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_female, "Female vowel spectrum");
 hold on;
-[f_female_lpc, mag_lpc_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree, "Female lpc vowel spectrum");
+[f_female_lpc, mag_lpc_female, a_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree, "Female lpc vowel spectrum");
 hold off;
+
+%Estimating formant frequencies
+[formants_male, bandwiths_male] = Formants(Fs_male, a_male)
+[formants_female, bandwiths_female] = Formants(Fs_female, a_female)
+
+%Estimate fundamental frequency
+
+%Plotting formant frequencies with spectrum
