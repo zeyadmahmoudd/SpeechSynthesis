@@ -1,5 +1,5 @@
 function [frequencies, magnitude_dB] = Spectrum(signal, fs, title_str)
-    
+    figure;
     % Compute FFT
     nfft = 2^nextpow2(length(signal));  % Use power of 2 for FFT efficiency
     X = fft(signal, nfft);
@@ -14,7 +14,7 @@ function [frequencies, magnitude_dB] = Spectrum(signal, fs, title_str)
     magnitude_dB = 20*log10(magnitude + eps);
     
     % Plot spectrum
-    plot(f, magnitude_dB, 'b', 'LineWidth', 0.5);
+    plot(f, magnitude_dB, 'k', 'LineWidth', 0.5);
     grid on;
     xlabel('Frequency (Hz)');
     ylabel('Magnitude (dB)');
