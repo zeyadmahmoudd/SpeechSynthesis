@@ -15,7 +15,7 @@ extension = ".wav";
 duration = 100e-3 ;
 start_position = 0.1;
 
-lpc_degree = 24;
+lpc_degree = 21;
 
 %male and female files of same word
 had_male = speechfiles + had + male + extension;
@@ -31,15 +31,15 @@ pause(length(had_male)/Fs_male);
 sound(had_female, Fs_female);
 pause(length(had_female)/Fs_female);
 
-% %waveform
+%waveform
 [time_male, amplitude_male] = Waveform(had_male, Fs_male, "had male");
 [time_female, amplitude_female] = Waveform(had_female, Fs_female, "had female");
 
-% %spectrum
+%spectrum
 [frequencies_male, magnitude_dB_male] = Spectrum(had_male, Fs_male, "had male");
 [frequencies_female, magnitude_dB_female] = Spectrum(had_female, Fs_female, "had female");
 
-% %spectogram
+%spectogram
 Spectrogram(had_male, Fs_male, "had male");
 Spectrogram(had_female, Fs_female, "had female");
 
@@ -55,15 +55,35 @@ sound(vowel_data_female, Fs_female);
 pause(length(vowel_data_female)/Fs_female);
 
 %Plotting Spectrum and lpc for male vowel
-figure;
 [f_male, mag_orig_male] = Spectrum(vowel_data_male, Fs_male, "Male vowel spectrum");
 hold on;
-[f_male_lpc, mag_lpc_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree, "Male lpc vowel spectrum");
+[f_male_lpc, mag_lpc_male, a_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree, "Male lpc vowel spectrum");
 hold off;
 
 %Plotting Spectrum and lpc for female vowel
-figure;
-[f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_male, "Male vowel spectrum");
+[f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_female, "Female vowel spectrum");
 hold on;
-[f_female_lpc, mag_lpc_female] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree, "Male lpc vowel spectrum");
+[f_female_lpc, mag_lpc_female, a_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree);
+hold off;
+
+%Estimating formant frequencies
+[formants_male, bandwiths_male] = Formants(Fs_male, a_male)
+[formants_female, bandwiths_female] = Formants(Fs_female, a_female)
+
+%Estimate fundamental frequency
+FundamentalFrequency_male = FundamentalFrequency(vowel_data_male, Fs_male)
+FundamentalFrequency_female = FundamentalFrequency(vowel_data_female, Fs_female)
+
+%indicating formant frequencies on spectrum of male vowel
+[f_male, mag_orig_male] = Spectrum(vowel_data_male, Fs_male, "Male vowel with formants");
+hold on;
+[f_male_lpc, mag_lpc_male, a_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree);
+PlotFormants(formants_male, f_male_lpc, mag_lpc_male);
+hold off;
+
+%indicating formant frequencies on spectrum of female vowel
+[f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_female, "Female vowel with formants");
+hold on;
+[f_female_lpc, mag_lpc_female, a_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree);
+PlotFormants(formants_female, f_female_lpc, mag_lpc_female);
 hold off;
