@@ -57,13 +57,13 @@ pause(length(vowel_data_female)/Fs_female);
 %Plotting Spectrum and lpc for male vowel
 [f_male, mag_orig_male] = Spectrum(vowel_data_male, Fs_male, "Male vowel spectrum");
 hold on;
-[f_male_lpc, mag_lpc_male, a_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree);
+[f_male_lpc, mag_lpc_male, a_male, g_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree);
 hold off;
 
 %Plotting Spectrum and lpc for female vowel
 [f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_female, "Female vowel spectrum");
 hold on;
-[f_female_lpc, mag_lpc_female, a_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree);
+[f_female_lpc, mag_lpc_female, a_female, g_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree);
 hold off;
 
 %Estimating formant frequencies
@@ -77,22 +77,22 @@ FundamentalFrequency_female = FundamentalFrequency(vowel_data_female, Fs_female)
 %Indicating formant frequencies on spectrum of male vowel
 [f_male, mag_orig_male] = Spectrum(vowel_data_male, Fs_male, "Male vowel with formants");
 hold on;
-[f_male_lpc, mag_lpc_male, a_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree);
+[f_male_lpc, mag_lpc_male, a_male, g_male] = plotLPCSpectrum(vowel_data_male, Fs_male, lpc_degree);
 PlotFormants(formants_male, f_male_lpc, mag_lpc_male);
 hold off;
 
 %Indicating formant frequencies on spectrum of female vowel
 [f_female, mag_orig_female] = Spectrum(vowel_data_female, Fs_female, "Female vowel with formants");
 hold on;
-[f_female_lpc, mag_lpc_female, a_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree);
+[f_female_lpc, mag_lpc_female, a_female, g_female] = plotLPCSpectrum(vowel_data_female, Fs_female, lpc_degree);
 PlotFormants(formants_female, f_female_lpc, mag_lpc_female);
 hold off;
 
 %Creating pulse train for the synthesiser
-PulseTrain_male = PulseTrain(FundamentalFrequency_male, duration, Fs_male, "male");
-PulseTrain_female = PulseTrain(FundamentalFrequency_female, duration, Fs_female, "female");
+pulseTrain_male = PulseTrain(FundamentalFrequency_male, duration, Fs_male, "male");
+pulseTrain_female = PulseTrain(FundamentalFrequency_female, duration, Fs_female, "female");
 
 
 %Synthesising Speech
-% synthesised_male = Synthesiser(PulseTrain_male, );
-% synthesised_female = Synthesiser(PulseTrain_female,);
+synthesised_male = Synthesiser(a_male, g_male, pulseTrain_male);
+synthesised_female = Synthesiser(a_female, g_female, pulseTrain_female);
