@@ -1,7 +1,8 @@
-function synthesised_speech = Synthesiser(a, g, pulsetrain)
+function synthesised_speech = Synthesiser(a, g, pulsetrain, time, fs, filename)
     
-    
-    synthesised_speech = filter(a, g, pulsetrain)
-    
+    figure;
+    synthesised_speech = filter([g], [a], pulsetrain);
+    audiowrite(filename, synthesised_speech,fs);
+    plot(time, synthesised_speech)
 
 end

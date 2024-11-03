@@ -1,4 +1,4 @@
-function pulse_train = PulseTrain(f0, duration, fs, title_)
+function [pulse_train, t] = PulseTrain(f0, duration, fs, title_)
     figure;
     
     t = 0:1/fs:duration-1/fs;
