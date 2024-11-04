@@ -15,7 +15,7 @@ extension = ".wav";
 duration = 100e-3 ;
 start_position = 0.1;
 
-lpc_degree = 21;
+lpc_degree = 14;
 
 %Male and female files of same word
 had_male = speechfiles + had + male + extension;
@@ -89,10 +89,10 @@ PlotFormants(formants_female, f_female_lpc, mag_lpc_female);
 hold off;
 
 %Creating pulse train for the synthesiser
-pulseTrain_male = PulseTrain(FundamentalFrequency_male, duration, Fs_male, "male");
-pulseTrain_female = PulseTrain(FundamentalFrequency_female, duration, Fs_female, "female");
+[pulseTrain_male, time_male] = PulseTrain(FundamentalFrequency_male, duration, Fs_male, "male");
+[pulseTrain_female, time_female] = PulseTrain(FundamentalFrequency_female, duration, Fs_female, "female");
 
 
 %Synthesising Speech
-synthesised_male = Synthesiser(a_male, g_male, pulseTrain_male);
-synthesised_female = Synthesiser(a_female, g_female, pulseTrain_female);
+synthesised_male = Synthesiser(a_male, g_male, pulseTrain_male, time_male, Fs_male, "synthesised_vowel_a_male.wav", "vowel a male");
+synthesised_female = Synthesiser(a_female, g_female, pulseTrain_female, time_female, Fs_female, "synthesised_vowel_a_female.wav", "vowel a male");
