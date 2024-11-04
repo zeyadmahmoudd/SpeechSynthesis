@@ -94,5 +94,5 @@ hold off;
 
 
 %Synthesising Speech
-synthesised_male = Synthesiser(a_male, g_male, pulseTrain_male, time_male, Fs_male, "synthesised_had_male.wav");
-synthesised_female = Synthesiser(a_female, g_female, pulseTrain_female, time_female, Fs_female, "synthesised_had_female.wav");
+synthesised_male = Synthesiser(a_male, g_male, pulseTrain_male, time_male, Fs_male, "synthesised_vowel_a_male.wav", "vowel a male");
+synthesised_female = Synthesiser(a_female, g_female, pulseTrain_female, time_female, Fs_female, "synthesised_vowel_a_female.wav", "vowel a male");

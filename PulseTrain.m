@@ -12,4 +12,5 @@ function [pulse_train, t] = PulseTrain(f0, duration, fs, title_)
     plot(t, pulse_train);
     title("Pulse train for " + title_)
     xlabel("time (sec)")
+    
 end
