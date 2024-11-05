@@ -1,0 +1,5 @@
+#Ignore experiments and synthesized audio files to add
+Experiments/
+Synthesized_speech/
+*.wav 
+*png
