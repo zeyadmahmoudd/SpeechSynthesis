@@ -17,12 +17,28 @@ duration = 100e-3 ;
 start_position = 0.1;
 
 %LPC order
-lpc_degree = 14;
+lpc_degree = 16;
 
 %title for plots and folders of experiments
 additional_title = "lpc order = " + string(lpc_degree) + ", start position = " + string(start_position) + "sec, duration = " + string(duration)+ "sec";
 
-%Creating experiment folders
+%Creating experiment folders to save plots
+experiments_folder = fullfile(currentDir, "Experiments");
+
+if ~exist(experiments_folder, 'dir')
+    mkdir(experiments_folder);
+end
+
+experiment_folder_name = regexprep(additional_title, '[ =,]', '');
+experiment_folder = fullfile(experiments_folder, experiment_folder_name);
+mkdir(experiment_folder)
+
+%Creating folder for saving synthesized speech
+synthesize_folder = fullfile(currentDir, "Synthesized_speech");
+
+if ~exist(synthesize_folder, 'dir')
+    mkdir(synthesize_folder);
+end
 
 %Male and female files of same word
 had_male = speechfiles + had + male + extension;
@@ -108,6 +124,12 @@ hold off;
 [pulseTrain_female, time_female] = PulseTrain(FundamentalFrequency_female, duration, Fs_female, {"female", additional_title});
 
 
-%Synthesising Speech
-synthesised_male = Synthesiser(a_male, g_male, pulseTrain_male, time_male, Fs_male, "synthesised_vowel_a_male.wav", {"vowel a male", additional_title});
-synthesised_female = Synthesiser(a_female, g_female, pulseTrain_female, time_female, Fs_female, "synthesised_vowel_a_female.wav", {"vowel a female", additional_title});
+%Synthesising Speech and saving it
+synthesised_male = Synthesiser(a_male, g_male, pulseTrain_male, time_male, Fs_male, {"vowel a male", additional_title}, synthesize_folder);
+synthesised_female = Synthesiser(a_female, g_female, pulseTrain_female, time_female, Fs_female, {"vowel a female", additional_title}, synthesize_folder);
+
+%Saving Figures
+SaveFigures(experiment_folder);
+
+%Saving fundamental frequencies
+SaveFundamentalFrequency(FundamentalFrequency_male, FundamentalFrequency_female, experiment_folder);
