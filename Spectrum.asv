@@ -2,16 +2,12 @@ function [frequencies, magnitude_dB] = Spectrum(signal, fs, title_)
     
     figure;
     
-    if isstring(title_) || ischar(title_)
-        title_text = sprintf("Spectrum for %s", title_);
-    elseif iscell(title_)
-        if length(title_) >= 2
-            title_text = sprintf("Spectrum for %s\n%s", title_{1}, title_{2});
-        else
-            title_text = sprintf("Spectrum for %s", title_{1});
-        end
+    if(length(title_) == 2)
+        title_text = sprintf("Spectrum for %s\n%s", title_{1}, title_{2});
     end
-    
+    else
+        title_text = sprintf("Spectrum for %s", title_);
+    end
     % Compute FFT
     nfft = 2^nextpow2(length(signal));  % Use power of 2 for FFT efficiency
     X = fft(signal, nfft);
@@ -30,6 +26,7 @@ function [frequencies, magnitude_dB] = Spectrum(signal, fs, title_)
     grid on;
     xlabel('Frequency (Hz)');
     ylabel('Magnitude (dB)');
+    title_text = sprintf("Spectrum for %s\n%s", title_{1}, title_{2});
     title(title_text);
 
     xlim([0, fs/2]);

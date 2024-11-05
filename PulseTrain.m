@@ -10,7 +10,8 @@ function [pulse_train, t] = PulseTrain(f0, duration, fs, title_)
     pulse_train(1:T:end) = 1;
     
     plot(t, pulse_train);
-    title("Pulse train for " + title_)
+    title_text = sprintf("Pulse train for %s\n%s", title_{1}, title_{2});
+    title(title_text);
     xlabel("time (sec)")
     
 end

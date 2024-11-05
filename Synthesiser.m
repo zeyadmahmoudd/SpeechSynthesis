@@ -6,5 +6,6 @@ function synthesised_speech = Synthesiser(a, g, pulsetrain, time, fs, filename, 
     plot(time, synthesised_speech)
     xlabel("Time(sec)");
     ylabel("Amplitude");
-    title("synthesized" + title_)
+    title_text = sprintf("synthesized  %s\n%s", title_{1}, title_{2});
+    title(title_text);
 end
