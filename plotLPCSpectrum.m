@@ -1,4 +1,4 @@
-function [frequencies, lpc_spectrum, a, g] = plotLPCSpectrum(signal, fs, order)
+function [frequencies, lpc_spectrum, a, g] = plotLPCSpectrum(signal, fs, order, gf)
     % Compute LPC coefficients
     [a, g] = lpc(signal, order);
     

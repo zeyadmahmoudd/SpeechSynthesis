@@ -16,7 +16,7 @@ function SaveFigures(directoryPath)
         % Set standard figure size
         screensize = get(0,'ScreenSize');
         width = 1200;  % Width in pixels
-        height = 600;  % Height in pixels
+        height = 300;  % Height in pixels
         left = (screensize(3) - width)/2;
         bottom = (screensize(4) - height)/2;
         set(fig, 'Position', [left, bottom, width, height]);
