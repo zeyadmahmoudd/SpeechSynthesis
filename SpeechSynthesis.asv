@@ -12,7 +12,6 @@ female = "_f";
 extension = ".wav";
 
 %parameters for segmenting signal
-duration_impulse_train = 1;
 duration = 100e-3 ;
 start_position = 0.1;
 
@@ -21,7 +20,7 @@ lpc_degree = 21;
 gain_factor = 1;
 
 %additional
-additional = "with normalization";
+additional = "energy based scaling";
 
 %title for plots and folders of experiments
 additional_title = "lpc order = " + string(lpc_degree) + ", gain factor = " + string(gain_factor)+ ", start position = " + string(start_position) + "sec, duration = " + string(duration)+ "sec "+ string(additional);
@@ -124,8 +123,8 @@ legend("Spectrum", "LPC", "Formants")
 hold off;
 
 %Creating pulse train for the synthesiser
-[pulseTrain_male, time_male] = PulseTrain(FundamentalFrequency_male, duration_impulse_train, Fs_male, {"male", additional_title});
-[pulseTrain_female, time_female] = PulseTrain(FundamentalFrequency_female, duration_impulse_train, Fs_female, {"female", additional_title});
+[pulseTrain_male, time_male] = PulseTrain(FundamentalFrequency_male, duration, Fs_male, {"male", additional_title});
+[pulseTrain_female, time_female] = PulseTrain(FundamentalFrequency_female, duration, Fs_female, {"female", additional_title});
 
 
 %Synthesising Speech and saving it
